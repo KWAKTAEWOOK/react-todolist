@@ -8,7 +8,7 @@ import {
 import cn from "classnames";
 import "../styles/TodoListItem.scss";
 
-const TodoListItem = ({todo, onToggle, onRemove, onInsertToggle}) => {
+const TodoListItem = ({todo, onToggle, onRemove, onInsertToggle ,setSelectedTodo}) => {
     const {id,text,checked}= todo;
     return (
         <li className="TodoListItem">
@@ -23,6 +23,7 @@ const TodoListItem = ({todo, onToggle, onRemove, onInsertToggle}) => {
         </div>
         <div className="edit" onClick={() => {
             onInsertToggle();
+            setSelectedTodo(prev=>todo);
 
         }}>
             <MdModeEditOutline />

@@ -7,6 +7,7 @@ import TodoTemplate from "./components/TodoTemplate";
 function App() {
   const [todos, setTodos] = useState([]);
   const [insertToggle, setInsertToggle] = useState(false);
+  const [selectedTodo, setSelectedTodo] = useState(null);
   const nextId= useRef(1);
   const onInsert = (text) => {
     const todo = {//할일을 불러와야한다.
@@ -38,8 +39,8 @@ function App() {
   return (
   <TodoTemplate> 
     <TodoInsert onInsert={onInsert} />  
-    <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} onInsertToggle={onInsertToggle} /> 
-    {insertToggle && <TodoEdit onInsertToggle={onInsertToggle} />}
+    <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} onInsertToggle={onInsertToggle} setSelectedTodo={setSelectedTodo}/> 
+    {insertToggle && <TodoEdit onInsertToggle={onInsertToggle} selectedTodo={selectedTodo}/>}
   </TodoTemplate>// TodoTemplate.jsx 안에 app.title,content 출력
 
 )}
