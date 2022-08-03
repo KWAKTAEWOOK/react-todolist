@@ -16,6 +16,12 @@ function App() {
     setTodos((todos)=> todos.concat(todo));//(추가로직)todos는 빈배열이고 온인써트를입력받으면 todo에 값을 받아와서 todos에 담아준다.
     nextId.current++;//current는 현재값을 받아옴++는1씩증가
   };
+
+  const onRemove = id => {
+    setTodos(
+      todos => todos.filter(todo=>todo.id !== id)
+    )
+  }
   const onToggle = (id) => {
     setTodos((todos) =>
       todos.map((todo) =>
@@ -27,7 +33,7 @@ function App() {
   return (
   <TodoTemplate> 
     <TodoInsert onInsert={onInsert} />  
-    <TodoList todos={todos} onToggle={onToggle} /> 
+    <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} /> 
   </TodoTemplate>// TodoTemplate.jsx 안에 app.title,content 출력
 
 )}
