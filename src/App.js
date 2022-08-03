@@ -36,11 +36,18 @@ function App() {
       )
     );
   };
+  const onUpdate = (id, text) => {
+    setTodos((todos) =>
+      todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+    );
+    onInsertToggle();
+  };
+
   return (
   <TodoTemplate> 
     <TodoInsert onInsert={onInsert} />  
     <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} onInsertToggle={onInsertToggle} setSelectedTodo={setSelectedTodo}/> 
-    {insertToggle && <TodoEdit onInsertToggle={onInsertToggle} selectedTodo={selectedTodo}/>}
+    {insertToggle && <TodoEdit onInsertToggle={onInsertToggle} selectedTodo={selectedTodo} onUpdate={onUpdate}/>}
   </TodoTemplate>// TodoTemplate.jsx 안에 app.title,content 출력
 
 )}
