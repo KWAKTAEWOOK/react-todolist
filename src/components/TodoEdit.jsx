@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import "../styles/TodoEdit.scss";
 
-const TodoEdit = ({onUpdate,selectedTodo}) => {
+const TodoEdit = ({onUpdate,selectedTodo,onInsertToggle}) => {
     const [value, setValue] = useState("");
     const onChange=(e) => {
         setValue(e.target.value)
@@ -15,7 +15,13 @@ const TodoEdit = ({onUpdate,selectedTodo}) => {
         setValue(selectedTodo.text);
       }, [selectedTodo]);
     return (
-        <div className="background">
+      <div
+       className="background"
+       onClick={(e) => {
+        if (e.target !== e.currentTarget) return;
+        onInsertToggle();
+        }}
+      >
           <form onSubmit={onSubmit} className="todoedit__insert">
             <h2>수정하기</h2>
             <input

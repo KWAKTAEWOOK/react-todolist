@@ -8,22 +8,30 @@ import {
 import cn from "classnames";
 import "../styles/TodoListItem.scss";
 
-const TodoListItem = ({todo, onToggle, onRemove, onInsertToggle ,setSelectedTodo}) => {
+const TodoListItem = ({
+    todo, 
+    onToggle, 
+    onRemove, 
+    onInsertToggle ,
+    setSelectedTodo
+}) => {
     const {id,text,checked}= todo;
     return (
         <li className="TodoListItem">
             
-        <div onClick={() =>{
-            onToggle(id);
-         }} 
+        <div 
             className={cn("checkbox", { checked: checked })}
+            onClick={() =>{onToggle(id)}}
+            
         >
             {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
             <div className="text">{text}</div>
         </div>
-        <div className="edit" onClick={() => {
-            onInsertToggle();
-            setSelectedTodo(prev=>todo);
+        <div 
+            className="edit" 
+            onClick={() => {
+                onInsertToggle();
+                setSelectedTodo(prev=>todo);
 
         }}>
             <MdModeEditOutline />
@@ -32,6 +40,7 @@ const TodoListItem = ({todo, onToggle, onRemove, onInsertToggle ,setSelectedTodo
             onRemove(id);
             console.log(id);
             alert(`${id}가삭제되었습니다.`)
+            
         }}>
             
             <MdRemoveCircleOutline />
