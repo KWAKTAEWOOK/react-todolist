@@ -11,21 +11,28 @@ function App() {
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const nextId = useRef(4);
+  //const nextId = useRef(4);
 
   const onInsert = async (text) => {
+    try{
     const data = await axios({url: `http://localhost:4000/todos`,
     method: "POST",
-    data:{text}});
-
-    const todo = {
-      id: nextId.current,
-      text: text,
-      checked: false,
-    };
-    setTodos((todos) => todos.concat(todo));
-    nextId.current++;
+    data:{text}
+      });
+      
+    setTodos(data.data);
+    } catch (e) {
+      setError(e);
+    }
   };
+    // const todo = {
+    //   id: nextId.current,
+    //   text: text,
+    //   checked: false,
+    // };
+    // setTodos((todos) => todos.concat(todo));
+    // nextId.current++;
+  
 
   const onInsertToggle = async () => {
     setInsertToggle((prev) => !prev);
@@ -64,7 +71,7 @@ function App() {
     data:{perform_date:"2022-05-18 07:00:00", 
     text}})
     setTodos((todos) =>
-      todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+      todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))//삼항연산자
     );
     onInsertToggle();
     setSelectedTodo();
